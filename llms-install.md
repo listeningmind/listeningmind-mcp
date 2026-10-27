@@ -20,7 +20,7 @@ This is a hosted remote MCP server (Streamable HTTP). There is nothing to downlo
 3. To verify, call `why_people_buy` with `{"q": "mattress"}` (free). It returns the buying situations, decision criteria, thresholds, brands and pitfalls for the category, with a source link. `catalog` with `{}` lists every tool with its price and markets.
 4. Paid tools need a key. In a chat, call `claim_free_credits` with the person's e-mail, then `verify_code` with the 6-digit code they receive; the key is attached to the chat and the free monthly Lima are added. Or call `request_key`, show the approval link to the person, and wait until they approve it and set a monthly budget. For a fixed key, add `"headers": { "Authorization": "Bearer <KEY>" }` to the entry above. Call `estimate_cost` first and always pass `max_lima` on paid calls; a call never charges above it.
 
-Prices: 10 Lima = USD 1; a data call is 5 Lima for up to 1,000 rows. Every account gets 40 Lima a month (8 data calls), refilled on the 1st (Korea time).
+Prices: 10 Lima = USD 1. Data tools are priced per 1,000 results a call returns: keyword_info 10 Lima (ad metrics) or 100 (all metrics), intent_finder 20, path_finder 20 (keywords only) or 400 (with paths), cluster_finder 20 (keywords only) or 500 (with clusters), ai_overview 300. The price is set before the call; estimate_cost shows it. Every account gets 100 Lima at sign-up, then 20 Lima a month, refilled on the 1st (Korea time). Prices are proposals until launch: https://daas.listeningmind.ai/en/pricing
 
 Markets: `kr` (Naver + Google), `jp` (Google), `us` (Google, alpha). Pass `market` on every data call.
 

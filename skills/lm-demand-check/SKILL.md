@@ -13,9 +13,9 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 
 ## Spending rules
 
-- Prices are in Lima (10 Lima = USD 1; a data call is 5 Lima for up to 1,000 rows). Before each paid call, call `estimate_cost` with the tool name and the exact arguments, and show the person the typical and maximum Lima.
+- Prices are in Lima (10 Lima = USD 1). Data tools are priced per 1,000 results a call returns: `keyword_info` 10 Lima with `data_type: "ads"` or 100 with `"all"` (the default), `intent_finder` 20. Before each paid call, call `estimate_cost` with the tool name and the exact arguments, and show the person the typical and maximum Lima.
 - Never make a paid call until the person has said yes in this conversation.
-- Pass `max_lima` equal to the maximum from `estimate_cost`; the call never charges above it. If you get 401, get a key: call `claim_free_credits` with the person's e-mail and then `verify_code` with the 6-digit code they receive, or call `request_key`, show the approval link and wait. Either way the key is then attached to this conversation. Every account gets 40 Lima a month free.
+- Pass `max_lima` equal to the maximum from `estimate_cost`; the call never charges above it. If you get 401, get a key: call `claim_free_credits` with the person's e-mail and then `verify_code` with the 6-digit code they receive, or call `request_key`, show the approval link and wait. Either way the key is then attached to this conversation. Every account gets 100 Lima free at sign-up, then 20 Lima a month.
 
 ## Evidence rules
 
@@ -28,7 +28,7 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 ## Steps
 
 1. Agree on up to 10 keywords and the market (kr, jp or us; us is in alpha). Plan one `keyword_info` call for the list plus one `intent_finder` call for the main keyword, run `estimate_cost` for each, and tell the person the total.
-2. After a yes, call `keyword_info` with `keywords`, `market` and `max_lima`.
+2. After a yes, call `keyword_info` with `keywords`, `market` and `max_lima`. If the person only needs current volume, competition and CPC (no 4-year trend or demographics), pass `data_type: "ads"` (10 Lima per 1,000 keywords instead of 100).
 3. For the main keyword, call `intent_finder` with `keyword`, `market`, `limit: 30` and `max_lima`.
 
 ## Output format

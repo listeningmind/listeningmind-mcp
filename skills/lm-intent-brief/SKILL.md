@@ -15,7 +15,7 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 
 - Prices are in Lima (10 Lima = USD 1). Always call `estimate_cost` with `product`, `subject` and `market` first; it returns a quote. Show the person its `say_to_user` line, the price and whether the result is stored or built new.
 - Never call `place_order` with a price above 0 until the person has said yes in this conversation. A free test read (price 0) can go ahead.
-- Pass `max_lima` equal to the quoted price. If you get 401, get a key: call `claim_free_credits` with the person's e-mail and then `verify_code` with the 6-digit code they receive, or call `request_key`, show the approval link and wait. Either way the key is then attached to this conversation. Every account gets 40 Lima a month free.
+- Pass `max_lima` equal to the quoted price. If you get 401, get a key: call `claim_free_credits` with the person's e-mail and then `verify_code` with the 6-digit code they receive, or call `request_key`, show the approval link and wait. Either way the key is then attached to this conversation. Every account gets 100 Lima free at sign-up, then 20 Lima a month.
 - A build takes 2 to 6 minutes. Call `get_order_result` with the order code and `wait: 50` until the status is `delivered` or `delivered_not_charged`. Give the person the status page link from `say_to_user` so they can pick it up in another chat.
 
 ## Evidence rules
