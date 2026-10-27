@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.listeningmind.daas/intent-data",
   "title": "ListeningMind Intent Data",
-  "description": "Search-intent data for AI agents: what people search, in what order, and why. KR, JP, US alpha.",
+  "description": "Intent intelligence for agents: search paths, intent clusters and why people buy. KR, JP, US alpha",
   "version": "0.2.0",
   "websiteUrl": "https://daas.listeningmind.ai",
   "repository": {
@@ -25,7 +25,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Optional. Free tools (catalog, estimate_cost, get_sample, topic_search, whats_new) need no key. Paid tools: call request_key, then send 'Bearer <key>'.",
+          "description": "Optional. Free tools (why_people_buy, ask, catalog, topic_search, get_sample, estimate_cost) need no key. Paid tools: get a key with claim_free_credits or request_key, then send 'Bearer <key>'.",
           "isRequired": false,
           "isSecret": true
         }

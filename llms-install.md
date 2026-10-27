@@ -16,9 +16,11 @@ This is a hosted remote MCP server (Streamable HTTP). There is nothing to downlo
 }
 ```
    Keep `"type": "streamableHttp"`. Without it the client falls back to SSE, and this server answers GET with 405.
-2. No API key is needed to connect. These 5 tools are free and need no key: `catalog`, `whats_new`, `estimate_cost`, `get_sample`, `topic_search`.
-3. To verify, call `catalog` with `{}`. It lists every tool with its price unit and markets.
-4. Paid tools need a key. Call `request_key`, show the approval link to the user, and wait until they approve it and set a monthly budget. In this chat the key is then bound to the session; for a fixed key, add `"headers": { "Authorization": "Bearer <KEY>" }` to the entry above. Call `estimate_cost` first and always pass `max_lima` on paid calls; a call never charges above it.
+2. No API key is needed to connect. These tools are free and need no key: `why_people_buy`, `ask`, `catalog`, `topic_search`, `get_sample`, `estimate_cost`.
+3. To verify, call `why_people_buy` with `{"q": "mattress"}` (free). It returns the buying situations, decision criteria, thresholds, brands and pitfalls for the category, with a source link. `catalog` with `{}` lists every tool with its price and markets.
+4. Paid tools need a key. In a chat, call `claim_free_credits` with the person's e-mail, then `verify_code` with the 6-digit code they receive; the key is attached to the chat and the free monthly Lima are added. Or call `request_key`, show the approval link to the person, and wait until they approve it and set a monthly budget. For a fixed key, add `"headers": { "Authorization": "Bearer <KEY>" }` to the entry above. Call `estimate_cost` first and always pass `max_lima` on paid calls; a call never charges above it.
+
+Prices: 10 Lima = USD 1; a data call is 5 Lima for up to 1,000 rows. Every account gets 40 Lima a month (8 data calls), refilled on the 1st (Korea time).
 
 Markets: `kr` (Naver + Google), `jp` (Google), `us` (Google, alpha). Pass `market` on every data call.
 

@@ -13,9 +13,9 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 
 ## Spending rules
 
-- Prices are in Lima (1 Lima = KRW 100). Before each paid call, call `estimate_cost` with the tool name and the exact arguments, and show the person the typical and maximum Lima.
+- Prices are in Lima (10 Lima = USD 1; a data call is 5 Lima for up to 1,000 rows). Before each paid call, call `estimate_cost` with the tool name and the exact arguments, and show the person the typical and maximum Lima.
 - Never make a paid call until the person has said yes in this conversation.
-- Pass `max_lima` equal to the maximum from `estimate_cost`; the call never charges above it. If you get 401, call `request_key`, show the approval link and wait; the key is then attached to this conversation.
+- Pass `max_lima` equal to the maximum from `estimate_cost`; the call never charges above it. If you get 401, get a key: call `claim_free_credits` with the person's e-mail and then `verify_code` with the 6-digit code they receive, or call `request_key`, show the approval link and wait. Either way the key is then attached to this conversation. Every account gets 40 Lima a month free.
 
 ## Evidence rules
 
@@ -36,4 +36,4 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 - **Size**: monthly average volume per keyword, with competition and CPC.
 - **Direction**: volume_trend and, if monthly volume is present, the peak months.
 - **What people add to the search**: group the related searches into 3 to 6 plain groups (price, comparison, problem, usage, brand) and name the largest.
-- **Next step**: if the person needs reasons and barriers, suggest the topic brief (`lm-intent-brief`) and quote its cost with `get_quote`.
+- **Next step**: if the person needs reasons and barriers, suggest the topic brief (`lm-intent-brief`) and quote its cost with `estimate_cost` (product `intent_kg`, subject, market). For a quick free read first, `why_people_buy` with the category returns its buying situations, criteria and pitfalls at no cost.

@@ -13,10 +13,10 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 
 ## Spending rules
 
-- Prices are in Lima. Always call `get_quote` first and show the person its `say_to_user` line, the price and whether the result is stored or built new.
+- Prices are in Lima (10 Lima = USD 1). Always call `estimate_cost` with `product`, `subject` and `market` first; it returns a quote. Show the person its `say_to_user` line, the price and whether the result is stored or built new.
 - Never call `place_order` with a price above 0 until the person has said yes in this conversation. A free test read (price 0) can go ahead.
-- Pass `max_lima` equal to the quoted price. If you get 401, call `request_key`, show the approval link and wait; the key is then attached to this conversation.
-- A build takes 2 to 6 minutes. Call `wait_for_order` until the status is `delivered` or `delivered_not_charged`. Give the person the status page link from `say_to_user` so they can pick it up in another chat.
+- Pass `max_lima` equal to the quoted price. If you get 401, get a key: call `claim_free_credits` with the person's e-mail and then `verify_code` with the 6-digit code they receive, or call `request_key`, show the approval link and wait. Either way the key is then attached to this conversation. Every account gets 40 Lima a month free.
+- A build takes 2 to 6 minutes. Call `get_order_result` with the order code and `wait: 50` until the status is `delivered` or `delivered_not_charged`. Give the person the status page link from `say_to_user` so they can pick it up in another chat.
 
 ## Evidence rules
 
@@ -29,9 +29,9 @@ This skill uses the ListeningMind MCP server at `https://daas.listeningmind.ai/m
 ## Steps
 
 1. Agree on the topic and market (kr, jp or us). Use the market's language for the topic.
-2. `find_samples` with product `intent_kg` and the topic words. If a stored topic matches, use it; otherwise the order will build it.
-3. `get_quote` with product `intent_kg`, subject, market. Show the terms. If `options` offers both the stored result and a rebuild, show both with as-of date and age, and let the person choose.
-4. After a yes, `place_order` with `quote_id` and `max_lima`, then `wait_for_order` until delivered. Then `get_order_result`.
+2. `topic_search` with the topic words and market (free). If a stored topic matches, use it; otherwise the order will build it. For a free first look, `why_people_buy` returns the top buying situations, criteria, thresholds, brands and pitfalls.
+3. `estimate_cost` with product `intent_kg`, subject, market. Show the terms. If `options` offers both the stored result and a rebuild, show both with as-of date and age, and let the person choose.
+4. After a yes, `place_order` with `quote_id` and `max_lima`, then `get_order_result` with `wait: 50` until delivered.
 5. Write the brief from `data.elements` and `data.entities`.
 
 ## Brief format
